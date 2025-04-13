@@ -1,6 +1,10 @@
 <?php
-require 'db.php';
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+require 'db.php';
 $poll_id = $_GET['poll_id'] ?? 1;
 
 $stmt = $pdo->prepare("SELECT * FROM polls WHERE id = ?");
